@@ -1,0 +1,193 @@
+
+74hc595.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         000000f6  00000000  00000000  00000054  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .data         00000000  00800060  00800060  0000014a  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .comment      00000030  00000000  00000000  0000014a  2**0
+                  CONTENTS, READONLY
+  3 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  0000017c  2**2
+                  CONTENTS, READONLY
+  4 .debug_aranges 00000030  00000000  00000000  000001b8  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_info   0000070b  00000000  00000000  000001e8  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_abbrev 00000610  00000000  00000000  000008f3  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_line   000001d5  00000000  00000000  00000f03  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_frame  0000004c  00000000  00000000  000010d8  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_str    00000398  00000000  00000000  00001124  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_loc    000000f1  00000000  00000000  000014bc  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_ranges 00000020  00000000  00000000  000015ad  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 2a 00 	jmp	0x54	; 0x54 <__ctors_end>
+   4:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+   8:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+   c:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  10:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  14:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  18:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  1c:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  20:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  24:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  28:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  2c:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  30:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  34:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  38:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  3c:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  40:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  44:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  48:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  4c:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  50:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+
+00000054 <__ctors_end>:
+  54:	11 24       	eor	r1, r1
+  56:	1f be       	out	0x3f, r1	; 63
+  58:	cf e5       	ldi	r28, 0x5F	; 95
+  5a:	d8 e0       	ldi	r29, 0x08	; 8
+  5c:	de bf       	out	0x3e, r29	; 62
+  5e:	cd bf       	out	0x3d, r28	; 61
+  60:	0e 94 5d 00 	call	0xba	; 0xba <main>
+  64:	0c 94 79 00 	jmp	0xf2	; 0xf2 <_exit>
+
+00000068 <__bad_interrupt>:
+  68:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+0000006c <shiftOut>:
+		displaySegment(0x00);
+		_delay_ms(1000);
+    }
+}
+
+void shiftOut(uint8_t val){
+  6c:	27 e0       	ldi	r18, 0x07	; 7
+  6e:	30 e0       	ldi	r19, 0x00	; 0
+	uint8_t i;
+	uint8_t data;
+	for (i = 0; i < 8; i++)
+	{
+		data = val & (1<<(7-i));
+		if (data == 0)
+  70:	61 e0       	ldi	r22, 0x01	; 1
+  72:	70 e0       	ldi	r23, 0x00	; 0
+  74:	ab 01       	movw	r20, r22
+  76:	02 2e       	mov	r0, r18
+  78:	02 c0       	rjmp	.+4      	; 0x7e <shiftOut+0x12>
+  7a:	44 0f       	add	r20, r20
+  7c:	55 1f       	adc	r21, r21
+  7e:	0a 94       	dec	r0
+  80:	e2 f7       	brpl	.-8      	; 0x7a <shiftOut+0xe>
+  82:	48 23       	and	r20, r24
+  84:	11 f4       	brne	.+4      	; 0x8a <shiftOut+0x1e>
+		{
+			DATA_0;
+  86:	94 98       	cbi	0x12, 4	; 18
+  88:	01 c0       	rjmp	.+2      	; 0x8c <shiftOut+0x20>
+		}
+		else{
+			DATA_1;
+  8a:	94 9a       	sbi	0x12, 4	; 18
+		}
+		CLOCK_1;
+  8c:	90 9a       	sbi	0x12, 0	; 18
+		CLOCK_0;
+  8e:	90 98       	cbi	0x12, 0	; 18
+  90:	21 50       	subi	r18, 0x01	; 1
+  92:	31 09       	sbc	r19, r1
+  94:	78 f7       	brcc	.-34     	; 0x74 <shiftOut+0x8>
+		
+	}
+}
+  96:	08 95       	ret
+
+00000098 <displaySegment>:
+
+void displaySegment(uint8_t	POS1){
+  98:	cf 93       	push	r28
+  9a:	c8 2f       	mov	r28, r24
+	
+	LATCH_0;
+  9c:	91 98       	cbi	0x12, 1	; 18
+	shiftOut(POS1);
+  9e:	0e 94 36 00 	call	0x6c	; 0x6c <shiftOut>
+	shiftOut(POS1);
+  a2:	8c 2f       	mov	r24, r28
+  a4:	0e 94 36 00 	call	0x6c	; 0x6c <shiftOut>
+	shiftOut(POS1);
+  a8:	8c 2f       	mov	r24, r28
+  aa:	0e 94 36 00 	call	0x6c	; 0x6c <shiftOut>
+	shiftOut(POS1);
+  ae:	8c 2f       	mov	r24, r28
+  b0:	0e 94 36 00 	call	0x6c	; 0x6c <shiftOut>
+	LATCH_1;
+  b4:	91 9a       	sbi	0x12, 1	; 18
+}
+  b6:	cf 91       	pop	r28
+  b8:	08 95       	ret
+
+000000ba <main>:
+
+int main(void)
+{
+    /* Replace with your application code */
+	
+	DDRD = (1<<DDD5)|(1<<DDD4)|(1<<DDD1)|(1<<DDD0);//SET SEBAGAI OUTPUT
+  ba:	83 e3       	ldi	r24, 0x33	; 51
+  bc:	81 bb       	out	0x11, r24	; 17
+	PORTD = (0<<PORTD5)|(0<<PORTD4)|(0<<PORTD1)|(0<<PORTD0);
+  be:	12 ba       	out	0x12, r1	; 18
+		
+	
+    while (1) 
+    {
+		displaySegment(0b01111111);
+  c0:	8f e7       	ldi	r24, 0x7F	; 127
+  c2:	0e 94 4c 00 	call	0x98	; 0x98 <displaySegment>
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+  c6:	2f ef       	ldi	r18, 0xFF	; 255
+  c8:	83 ed       	ldi	r24, 0xD3	; 211
+  ca:	90 e3       	ldi	r25, 0x30	; 48
+  cc:	21 50       	subi	r18, 0x01	; 1
+  ce:	80 40       	sbci	r24, 0x00	; 0
+  d0:	90 40       	sbci	r25, 0x00	; 0
+  d2:	e1 f7       	brne	.-8      	; 0xcc <main+0x12>
+  d4:	00 c0       	rjmp	.+0      	; 0xd6 <main+0x1c>
+  d6:	00 00       	nop
+		_delay_ms(1000);
+		displaySegment(0x00);
+  d8:	80 e0       	ldi	r24, 0x00	; 0
+  da:	0e 94 4c 00 	call	0x98	; 0x98 <displaySegment>
+  de:	2f ef       	ldi	r18, 0xFF	; 255
+  e0:	83 ed       	ldi	r24, 0xD3	; 211
+  e2:	90 e3       	ldi	r25, 0x30	; 48
+  e4:	21 50       	subi	r18, 0x01	; 1
+  e6:	80 40       	sbci	r24, 0x00	; 0
+  e8:	90 40       	sbci	r25, 0x00	; 0
+  ea:	e1 f7       	brne	.-8      	; 0xe4 <main+0x2a>
+  ec:	00 c0       	rjmp	.+0      	; 0xee <main+0x34>
+  ee:	00 00       	nop
+  f0:	e7 cf       	rjmp	.-50     	; 0xc0 <main+0x6>
+
+000000f2 <_exit>:
+  f2:	f8 94       	cli
+
+000000f4 <__stop_program>:
+  f4:	ff cf       	rjmp	.-2      	; 0xf4 <__stop_program>
