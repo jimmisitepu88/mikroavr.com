@@ -1,0 +1,119 @@
+﻿Version=4
+IconFile=
+NumberOfModules=0
+Build1=Default,b4a.example
+DoNotOverwriteManifest=False
+ManifestCode='This code will be applied to the manifest file during compilation.~\n~'You do not need to modify it in most cases.~\n~'See this link for for more information: http://www.basic4ppc.com/forum/showthread.php?p=78136~\n~AddManifestText(~\n~<uses-sdk android:minSdkVersion="5" android:targetSdkVersion="14"/>~\n~<supports-screens android:largeScreens="true" ~\n~    android:normalScreens="true" ~\n~    android:smallScreens="true" ~\n~    android:anyDensity="true"/>)~\n~SetApplicationAttribute(android:icon, "@drawable/icon")~\n~SetApplicationAttribute(android:label, "$LABEL$")~\n~'SetApplicationAttribute(android:theme, "@android:style/Theme.Holo")~\n~'End of default text.~\n~
+NumberOfFiles=0
+NumberOfLibraries=1
+Library1=core
+@EndOfDesignText@
+#Region  Project Attributes 
+	#ApplicationLabel: TUGAS UNPAB APP MOBILE
+	#VersionCode: 1
+	#VersionName: 
+	'SupportedOrientations possible values: unspecified, landscape or portrait.
+	#SupportedOrientations: unspecified
+	#CanInstallToExternalStorage: False
+#End Region
+
+#Region  Activity Attributes 
+	#FullScreen: False
+	#IncludeTitle: True
+#End Region
+
+Sub Process_Globals
+	'These global variables will be declared once when the application starts.
+	'These variables can be accessed from all modules.
+
+End Sub
+
+Sub Globals
+	'These global variables will be redeclared each time the activity is created.
+	'These variables can only be accessed from this module.
+	
+	Dim lblcel As Label
+	Dim txtcel As EditText
+	
+	Dim lblkel As Label
+	Dim txtkel As EditText
+	
+	Dim lblfah As Label
+	Dim txtfah As EditText
+	
+	Dim lblrea As Label
+	Dim txtrea As EditText
+	
+	Dim btnOK As Button
+	
+	Dim cel As Float, kel As Float, fah As Float, rea As Float
+	
+
+End Sub
+
+Sub Activity_Create(FirstTime As Boolean)
+	'Do not forget to load the layout file created with the visual designer. For example:
+	'Activity.LoadLayout("Layout1")
+	
+	
+	lblcel.Initialize("lblcel")
+	lblcel.Text = "Celcius"
+	Activity.AddView(lblcel,10%x, 10%y, 20%x, 10%y)
+	
+	txtcel.Initialize("txtCel")
+	txtcel.InputType = txtcel.INPUT_TYPE_DECIMAL_NUMBERS
+	Activity.AddView(txtcel,55%x, 5%y, 20%x, 10%y)
+	
+	lblkel.Initialize("lblkel")
+	lblkel.Text = "Kelvin"
+	Activity.AddView(lblkel,10%x, 20%y, 20%x, 10%y)
+	
+	txtkel.Initialize("txtkel")
+	txtkel.InputType = txtkel.INPUT_TYPE_NONE
+	Activity.AddView(txtkel,55%x, 15%y, 20%x, 10%y)
+	
+	lblfah.Initialize("lblfah")
+	lblfah.Text = "Fahrenheit"
+	Activity.AddView(lblfah,10%x, 30%y, 20%x, 10%y)
+	
+	txtfah.Initialize("txtfah")
+	txtfah.InputType = txtfah.INPUT_TYPE_NONE
+	Activity.AddView(txtfah,55%x, 25%y, 20%x, 10%y)
+	
+	lblrea.Initialize("lblrea")
+	lblrea.Text = "Reamur"
+	Activity.AddView(lblrea,10%x, 40%y, 20%x, 10%y)
+	
+	txtrea.Initialize("txtrea")
+	txtrea.InputType = txtrea.INPUT_TYPE_NONE
+	Activity.AddView(txtrea,55%x, 35%y, 20%x, 10%y)
+	
+	
+	btnOK.Initialize("btnOK")
+	btnOK.Text = "KONVERSI"
+	Activity.AddView(btnOK,10%x, 80%y, 80%x, 10%y)
+	
+	
+
+End Sub
+
+Sub Activity_Resume
+
+End Sub
+
+Sub Activity_Pause (UserClosed As Boolean)
+
+End Sub
+
+Sub btnOK_click
+
+cel = txtcel.Text
+kel = cel + 273
+fah = (9/5)*cel + 32
+rea = (4/5)*cel
+
+txtkel.Text = kel
+txtfah.Text = fah
+txtrea.Text = rea
+
+End Sub
